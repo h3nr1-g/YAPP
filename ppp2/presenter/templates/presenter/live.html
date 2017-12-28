@@ -1,0 +1,15 @@
+{% extends 'presenter/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <script src="{% static "presenter/js/csrf.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% if picture %}
+        <image src="{{ picture.filePath }}"></image>
+    {% else %}
+        <h2>No Pictures have been uploaded :(</h2>
+    {% endif %}
+{% endblock %}

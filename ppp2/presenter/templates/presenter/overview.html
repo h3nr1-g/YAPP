@@ -1,0 +1,14 @@
+{% extends 'presenter/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% block head %}
+    <script src="{% static "presenter/js/csrf.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- panel for the user notifications -->
+    <div class="row">
+        {% render_table table %}
+    </div>
+{% endblock %}

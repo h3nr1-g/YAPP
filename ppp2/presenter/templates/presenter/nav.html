@@ -1,0 +1,20 @@
+{% load static %}
+<nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
+    <div class="container">
+        <a class="navbar-brand" href="{% url "presenter:overview" %}"><img src="{% static "presenter/images/logo2.png"%}" style="position: relative; top: -10px; left: -20px;" height="40"> </a>
+        <a class="navbar-brand" href="{% url "presenter:overview" %}" style="position:relative; color:white;">Party Picture Presenter v2</a>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url "presenter:overview" %}" style="font-weight: bold;">Overview</a>
+                </li>
+                <li>
+                    <a href="{% url "presenter:live" %}" style="font-weight: bold;">Live Mode</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
