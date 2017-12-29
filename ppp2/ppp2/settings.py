@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 PROJECT_APPS = [
     'presenter',
+    'bots',
 ]
 
 # Application definition
@@ -131,3 +132,6 @@ MEDIA_ROOT = os.path.realpath(os.path.join(BASE_DIR, '..','..','uploads'))
 
 # Presentation settings
 SECONDS_PER_PICTURE = 2
+BACKGROUND_COLOR = 'black'
+TITLE_FONT_COLOR = 'white'
+MAX_PICTURE_HEIGHT = 600

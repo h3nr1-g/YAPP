@@ -42,17 +42,16 @@
 
 </head>
 
-<body>
+<body id="bodyID">
     <!-- navigation -->
     {% include "presenter/nav.html" %}
     <div class="container">
         {% if title %}
             <div class="row">
                 <div class="col-md-12 col-md-offset-0">
-                    <h1>{{ title }}</h1>
+                    <h1 id="title">{{ title }}</h1>
                 </div>
             </div>
-            <br/>
         {% endif %}
         {% block content %}
         {% endblock %}

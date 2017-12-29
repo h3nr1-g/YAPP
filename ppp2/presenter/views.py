@@ -1,7 +1,12 @@
+import os
 import random
 
-from django.shortcuts import render
+from django.http import FileResponse
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 from django.views import View
+
+from ppp2.settings import SECONDS_PER_PICTURE, BACKGROUND_COLOR, TITLE_FONT_COLOR, MAX_PICTURE_HEIGHT
 from presenter.models import Picture
 from presenter.tables import PictureTable
 
@@ -40,8 +45,34 @@ class LiveModeView(View):
         :return:
         """
         pictures = Picture.objects.all()
+        picture = random.choice(list(pictures)) if len(pictures) > 0 else None
+        title = picture.title + '  (Likes: %d \t Dislikes: %d)' % (picture.likes, picture.dislikes)
         context = {
-            'picture': random.choice(list(pictures)) if len(pictures) > 0 else None
+            'picture': picture,
+            'title': 'Picture %d - %s' % (picture.id, title) if len(pictures) > 0 else None,
+            'bg_color': BACKGROUND_COLOR,
+            'title_color': TITLE_FONT_COLOR,
+            'duration': SECONDS_PER_PICTURE,
+            'max_height': MAX_PICTURE_HEIGHT,
         }
 
         return render(request, 'presenter/live.html', context)
+
+class PictureView(View):
+    """
+    View class for the provision of the picture file
+    """
+
+    def get(self,request,number):
+        """
+        Handler method for incoming GET requests
+
+        :param request:
+        :param id:
+        :return:
+        """
+        picture = get_object_or_404(Picture,pk=number)
+        if not os.path.exists(picture.filePath.path):
+            raise Http404()
+
+        return FileResponse(open(picture.filePath.path,'rb'))

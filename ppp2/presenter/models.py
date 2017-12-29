@@ -9,9 +9,7 @@ class Picture(models.Model):
     filePath = models.ImageField()
     title = models.CharField(
         max_length=200,
-        blank=True,
-        null= True,
-        default=None,
+        default='No Title',
     )
     likes = models.PositiveIntegerField()
     dislikes = models.PositiveIntegerField()

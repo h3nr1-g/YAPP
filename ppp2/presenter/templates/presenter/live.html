@@ -2,14 +2,26 @@
 {% load bootstrap3 %}
 {% load static %}
 {% load render_table from django_tables2 %}
+
 {% block head %}
     <script src="{% static "presenter/js/csrf.js" %}"></script>
+    <script src="{% static "presenter/js/live.js" %}"></script>
+    <script>
+        var duration = {{ duration }};
+        var bg_color = "{{ bg_color }}";
+        var title_color = "{{ title_color }}";
+        liveMode();
+    </script>
+
 {% endblock %}
 
 {% block content %}
     {% if picture %}
-        <image src="{{ picture.filePath }}"></image>
+        <image src="{% url "presenter:picture" picture.id %}" height="{{ max_height }}"></image>
     {% else %}
         <h2>No Pictures have been uploaded :(</h2>
     {% endif %}
+    <script>
+        format();
+    </script>
 {% endblock %}
