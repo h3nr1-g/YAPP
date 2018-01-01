@@ -46,17 +46,26 @@ class LiveModeView(View):
         """
         pictures = Picture.objects.all()
         picture = random.choice(list(pictures)) if len(pictures) > 0 else None
-        title = picture.title + '  (Likes: %d \t Dislikes: %d)' % (picture.likes, picture.dislikes)
+        if len(pictures) > 0:
+            title = picture.title + '  (Likes: %d \t Dislikes: %d)' % (picture.likes, picture.dislikes)
+        else:
+            title = None
+
+        if request.GET.get('mode',None) == 'fullscreen':
+            template = 'presenter/live_fullscreen.html'
+        else:
+            template = 'presenter/live.html'
+
         context = {
             'picture': picture,
-            'title': 'Picture %d - %s' % (picture.id, title) if len(pictures) > 0 else None,
+            'title': 'Picture %d - %s' % (picture.id, title) if title is not None else None,
             'bg_color': BACKGROUND_COLOR,
             'title_color': TITLE_FONT_COLOR,
             'duration': SECONDS_PER_PICTURE,
             'max_height': MAX_PICTURE_HEIGHT,
         }
 
-        return render(request, 'presenter/live.html', context)
+        return render(request, template, context)
 
 class PictureView(View):
     """
@@ -75,4 +84,20 @@ class PictureView(View):
         if not os.path.exists(picture.filePath.path):
             raise Http404()
 
-        return FileResponse(open(picture.filePath.path,'rb'))
+        return FileResponse(open(picture.filePath.path,'rb'), content_type='image/jpeg')
+
+
+class WebSocketView(View):
+    """
+    View class for debugging of web socket connection
+    """
+
+    def get(self,request):
+        """
+        Handler method for incoming GET requests
+
+        :param request:
+        :param id:
+        :return:
+        """
+        return render(request, 'presenter/ws.html')

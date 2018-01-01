@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Socket</title>
+    <script type="text/javascript" src="{% static 'omnibus/omnibus.min.js' %}"></script>
+    <script>
+        var options = {
+            ignoreSender: true,
+            autoReconnect: true,
+            autoReconnectTimeout: 1000,
+            authToken: '{{ OMNIBUS_AUTH_TOKEN }}'
+        };
+        var connection = new Omnibus(WebSocket, '{{ OMNIBUS_ENDPOINT }}', options);
+        var channel = connection.openChannel('updates');
+        channel.on('pictures', function(event) {
+            console.log(event);
+            console.log(event.data.payload.url);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

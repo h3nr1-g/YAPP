@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <script src="{% static "presenter/js/live.js" %}"></script>
+    <script src="{% static "presenter/js/csrf.js" %}"></script>
+    <script type="text/javascript" src="{% static 'omnibus/omnibus.min.js' %}"></script>
+    <script>
+        var duration = {{ duration }};
+        var bg_color = "{{ bg_color }}";
+        liveMode();
+    </script>
+</head>
+<body id="bodyID">
+ {% if picture %}
+        <img src="{% url "presenter:picture" picture.id %}" style="max-height:{{ max_height }}px;">
+    {% else %}
+        <h2>No Pictures have been uploaded :(</h2>
+    {% endif %}
+
+    <script>
+        format();
+    </script>
+</body>
+</html>

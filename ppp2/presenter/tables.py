@@ -10,7 +10,7 @@ class PictureTable(tables.Table):
     Table class for displaying of all uploaded photos
     """
 
-    filePath = TemplateColumn('<img src="{% url \"presenter:picture\" record.id %}" width="100", height="100">')
+    filePath = TemplateColumn('<a href="{% url \"presenter:picture\" record.id %}"><img src="{% url \"presenter:picture\" record.id %}" width="100", height="100"></a>')
     title = Column('Title')
     likes = Column('Likes')
     dislikes = Column('Dislikes')

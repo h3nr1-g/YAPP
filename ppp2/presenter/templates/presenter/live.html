@@ -6,10 +6,25 @@
 {% block head %}
     <script src="{% static "presenter/js/csrf.js" %}"></script>
     <script src="{% static "presenter/js/live.js" %}"></script>
+    <script type="text/javascript" src="{% static 'omnibus/omnibus.min.js' %}"></script>
     <script>
+        var timer;
         var duration = {{ duration }};
         var bg_color = "{{ bg_color }}";
         var title_color = "{{ title_color }}";
+        var options = {
+            ignoreSender: true,
+            autoReconnect: true,
+            autoReconnectTimeout: 1000,
+            authToken: '{{ OMNIBUS_AUTH_TOKEN }}'
+        };
+        var connection = new Omnibus(WebSocket, '{{ OMNIBUS_ENDPOINT }}', options);
+        var channel = connection.openChannel('updates');
+        channel.on('pictures', function(event) {
+            console.log(event);
+            update_picture(event);
+        });
+
         liveMode();
     </script>
 
@@ -17,7 +32,7 @@
 
 {% block content %}
     {% if picture %}
-        <image src="{% url "presenter:picture" picture.id %}" height="{{ max_height }}"></image>
+        <img id="pictureImg" src="{% url "presenter:picture" picture.id %}" style="max-height:{{ max_height }}px;">
     {% else %}
         <h2>No Pictures have been uploaded :(</h2>
     {% endif %}
