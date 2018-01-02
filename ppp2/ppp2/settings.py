@@ -129,5 +129,5 @@ TITLE_FONT_COLOR = 'white'
 MAX_PICTURE_HEIGHT = 800
 
 BOT_CREDENTIALS = {
-    'Telegram': 'TELEGRAM_TOKEN'
+    'Telegram': ''
 }
