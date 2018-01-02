@@ -19,7 +19,7 @@ function liveMode() {
 
 
 function update_picture(event) {
-    document.getElementById("title").innerHTML = "NEW PICTURE "+String(event.data.payload.number);
+    document.getElementById("title").innerHTML = "*NEW* PICTURE "+String(event.data.payload.number);
     document.getElementById("pictureImg").src = event.data.payload.url;
     timer.stop();
     timer.start();

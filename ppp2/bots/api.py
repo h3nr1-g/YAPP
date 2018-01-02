@@ -8,7 +8,7 @@ def get_favourite_pictures(top_n=5):
     :return: True, Queryset of pictures with the highest number of likes
     :rtype: tuple
     """
-    pictures = Picture.objects.all().order_by('-likes',)
+    pictures = Picture.objects.all().order_by('-likes', )
     pictures = pictures if top_n >= len(pictures) else pictures[:top_n]
     return True, pictures
 
@@ -91,6 +91,7 @@ def set_title(id, title):
     except Picture.DoesNotExist:
         return False, 'Sorry, I could not find a picture with this ID.'
 
+
 COMMANDS = {
     'get': {
         'worst': {
@@ -127,5 +128,3 @@ COMMANDS = {
         'regex': r'dislike \d+'
     }
 }
-
-

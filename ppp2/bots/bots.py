@@ -1,11 +1,7 @@
-
 import os
 import re
 from threading import Thread
 from time import sleep
-
-from django.urls import reverse_lazy
-from omnibus.api import publish
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext import Updater
@@ -13,7 +9,7 @@ from bots.api import COMMANDS
 from presenter.models import Picture
 
 
-class ChatBot():
+class BaseBot():
     """
     Base class for all implemented chat bots
     """
@@ -126,8 +122,7 @@ class ChatBot():
         return filename
 
 
-
-class TelegramBot(ChatBot, Thread):
+class TelegramBot(BaseBot, Thread):
     """
     Chat bot for Telegram
     """
@@ -163,7 +158,6 @@ class TelegramBot(ChatBot, Thread):
             update.message.reply_text('Thanks for the picture. It has the unique ID %d' % response.id)
         else:
             update.message.reply_text(response)
-
 
     def new_text_message(self, bot, update):
         """

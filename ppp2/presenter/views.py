@@ -30,14 +30,15 @@ class OverviewView(View):
             'table': PictureTable(Picture.objects.all().order_by('likes'))
         }
 
-        return render(request,'presenter/overview.html',context)
+        return render(request, 'presenter/overview.html', context)
+
 
 class LiveModeView(View):
     """
     View class for the live presentation of the uploaded pictures
     """
 
-    def get(self,request):
+    def get(self, request):
         """
         Handler method for incoming GET requests
 
@@ -51,7 +52,7 @@ class LiveModeView(View):
         else:
             title = None
 
-        if request.GET.get('mode',None) == 'fullscreen':
+        if request.GET.get('mode', None) == 'fullscreen':
             template = 'presenter/live_fullscreen.html'
         else:
             template = 'presenter/live.html'
@@ -67,12 +68,13 @@ class LiveModeView(View):
 
         return render(request, template, context)
 
+
 class PictureView(View):
     """
     View class for the provision of the picture file
     """
 
-    def get(self,request,number):
+    def get(self, request, number):
         """
         Handler method for incoming GET requests
 
@@ -80,24 +82,8 @@ class PictureView(View):
         :param id:
         :return:
         """
-        picture = get_object_or_404(Picture,pk=number)
+        picture = get_object_or_404(Picture, pk=number)
         if not os.path.exists(picture.filePath.path):
             raise Http404()
 
-        return FileResponse(open(picture.filePath.path,'rb'), content_type='image/jpeg')
-
-
-class WebSocketView(View):
-    """
-    View class for debugging of web socket connection
-    """
-
-    def get(self,request):
-        """
-        Handler method for incoming GET requests
-
-        :param request:
-        :param id:
-        :return:
-        """
-        return render(request, 'presenter/ws.html')
+        return FileResponse(open(picture.filePath.path, 'rb'), content_type='image/jpeg')

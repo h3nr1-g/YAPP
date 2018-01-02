@@ -2,7 +2,6 @@ import os
 from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.urls import reverse_lazy
-
 from presenter.models import Picture
 from omnibus.api import publish
 
