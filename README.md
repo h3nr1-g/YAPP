@@ -68,4 +68,4 @@ firefox http://127.0.0.1:8000
 
 Further Documentation
 ---------------------
-For further documentation take a look into HTML documentation (docs/build/html)
+For further documentation take a look into HTML documentation ([Link](docs/_build/html/index.html))
