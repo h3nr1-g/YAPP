@@ -16,7 +16,8 @@ messenger applications like Telegram (Telegram_). This documentation shows you h
    :maxdepth: 3
    :caption: Contents:
    
-
+   install
+   usage
 
 Indices and tables
 ==================

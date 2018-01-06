@@ -21,15 +21,11 @@ git clone https://github.com/h3nr1-g/Party-Picture-Presenter-2.git
 
 cd Party-Picture-Presenter-2
 
-virtualenv -p /usr/bin/python3 venv && source venv/bin/activate
+pip3 install -r requirements/base.txt
 
-cd ppp2
+python3 manage.py makemigrations presenter && python manage.py migrate
 
-pip install -r requirements/base.txt
-
-python manage.py makemigrations presenter && python manage.py migrate
-
-python manage.py createsuper
+python3 manage.py createsuper
 ```
 
 How to configure PPP2?
@@ -68,3 +64,8 @@ firefox http://127.0.0.1:8000
 * Send a photo to the bot
 
 * The bot will confirm the reception and show it in the browser window
+
+
+Further Documentation
+---------------------
+For further documentation take a look into HTML documentation (docs/build/html)
