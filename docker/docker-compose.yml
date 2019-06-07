@@ -12,7 +12,7 @@ services:
     environment:
       DJANGO_SECRET_KEY: "SECRET_1"
       DJANGO_SETTINGS_MODULE: "yapp.settings.docker"
-#      TELEGRAM_CONTACT: "https://t.me/MKHochzeitsfotobot"
+      TELEGRAM_CONTACT: "ENTER_YOUR_TELEGRAM_CONTACT_URL_HERE"
       YAPP_LANG: "de"
     volumes:
       - static_volume:/root/yapp/static
@@ -49,7 +49,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: "yapp.settings.docker"
       DJANGO_SECRET_KEY: "SECRET_3"
-      TELEGRAM_TOKEN: "892795297:AAGP0pbreyzScEiwRGdldU_DksQwB1j87aI"
+      TELEGRAM_TOKEN: "ENTER_YOUR_TELEGRAM_BOT_TOKEN_HERE"
       YAPP_LANG: "de"
     volumes:
       - ~/yapp_data/media:/root/yapp/media:rw

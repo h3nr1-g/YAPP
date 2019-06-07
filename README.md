@@ -59,6 +59,3 @@ export TELEGRAM_TOKEN=MY-TELEGRAM-BOT-TOKEN && python manage.py runbot
 ```
 
 
-Further Documentation
----------------------
-For further documentation take a look into HTML documentation ([Link](docs/_build/html/index.html))
