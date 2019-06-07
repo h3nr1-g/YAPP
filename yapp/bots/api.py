@@ -1,6 +1,5 @@
 from presenter.models import Picture
 
-
 def get_favourite_pictures(top_n, fail_msg=None):
     """
     Method returns a list with the most favorite pictures
@@ -104,3 +103,18 @@ def set_title(pid, title, success_msg=None, fail_msg=None):
         return True, success_msg
     except Picture.DoesNotExist:
         return False, fail_msg
+
+
+def show_help(introduction_message):
+    """
+    Method sends some of text messages and lists all available commands including a short explanation
+    """
+    from bots.ui import COMMANDS
+    messages = [introduction_message]
+    for element in COMMANDS:
+      try:
+         messages.append(element['description'])
+      except:
+          continue
+
+    return True, messages
