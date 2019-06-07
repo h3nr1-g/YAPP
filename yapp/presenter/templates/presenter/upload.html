@@ -1,0 +1,46 @@
+{% extends 'presenter/blank.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+
+{% block content %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>
+    </div>
+
+    {% if notification %}
+        {% if notification.0 %}
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">{{ notification.1 }}</div>
+            </div>
+        {% else %}
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body">{{ notification.1 }}</div>
+            </div>
+        {% endif %}
+        <br/>
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-12">
+            <form action="{% url "presenter:upload_picture" %}" method="post" class="form" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {% bootstrap_form form%}
+                {% buttons %}
+                    <button type="submit" style="width: 100%;" class="btn btn-lg btn-info">Bild speichern</button>
+                {% endbuttons %}
+            </form>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,6 +1,0 @@
-Django==2.0
-django-bootstrap3==9.1.0
-django-tables2==1.17.1
-Pillow==4.3.0
-python-telegram-bot==9.0.0
--e git://github.com/h3nr1-g/django-omnibus.git#egg=django-omnibus

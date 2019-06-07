@@ -1,0 +1,50 @@
+{% load static %}
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "presenter:live" %}" style="height: 140px;">
+            <div class="sidebar-brand-icon">
+                <img src="{% static "presenter/img/logo.png" %}" style="height: 50px;">
+
+            <br/><br/>
+            <div class="sidebar-brand-text mx-3">YAPP</div>
+            </div>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url "presenter:live" %}">
+                <i class="fas fa-fw  fa-camera-retro"></i>
+                <span>Live View</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "presenter:all_pictures" %}">
+                <i class="fas fa-fw fa-copy"></i>
+                <span>Alle Fotos</span>
+            </a>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "presenter:upload_picture" %}">
+                <i class="fas fa-image"></i>
+                <span>Bild hochladen</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+
+    </ul>
+    <!-- End of Sidebar -->

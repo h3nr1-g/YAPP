@@ -1,69 +1,62 @@
-Party Picture Presenter 2 - PPP2
-================================
+Yet Another Picture Presenter- YAPP
+===================================
 
-What is PPP2?
+What is YAPP?
 -------------
-PPP2 is a web based presentation software for party pictures. It is a new implementation of my first software version (https://github.com/h3nr1-g/PartyPicturePresenter).
+YAPP is a web based presentation software for party pictures. It is a new implementation of my first software version.
 
-An unique feature of this software is the interaction and data exchange with the presentation software via common messenger applications like Telegram (https://telegram.org/). The implemented interface allows you following functions:
+An unique feature of this software is the interaction and data exchange with the presentation software via common messenger application Telegram (https://telegram.org/). The implemented interface allows you following functions:
 
 * Upload of pictures
 * Download of pictures
 * Voting
+  * Add likes 
+  * Add dislikes
 * Renaming of pictures
 
 
-How to install PPP2?
---------------------
+Quick Start
+-----------
+Requirements:
+* *docker* (https://docs.docker.com/install/)
+* *docker-compose* (https://docs.docker.com/compose/install/)
+* Telegram bot account (https://core.telegram.org/bots#3-how-do-i-create-a-bot) 
+
 
 ```
-git clone https://github.com/h3nr1-g/Party-Picture-Presenter-2.git
+git clone https://github.com/h3nr1-g/Party-Picture-Presenter-2.git yapp
 
-cd Party-Picture-Presenter-2
+cd yapp/docker
 
-pip3 install -r requirements/base.txt
+# Replace in docker-compose.yml values of following environment variables: 
+#   DJANGO_SECRET_KEY -> secret key for the different Django app instances
+#   TELEGRAM_CONTACT -> Contact URL of the Telegram bot
+#   TELEGRAM_TOKEN -> Auth token of the bot
 
-python3 manage.py makemigrations presenter && python manage.py migrate
+docker-compose build 
 
-python3 manage.py createsuper
-```
+docker-compose up
 
-How to configure PPP2?
-----------------------
-* Open with an editor the file *Party-Picture-Presenter-2/ppp2/ppp2/settings.py*
-
-* Modify following entries:
-    * SECRET_KEY (Modify for safty reasons)
-    * ALLOWED_HOSTS (Add here the IP address of your machine)
-    * MEDIA_ROOT (This will be the upload directory for new pictures)
-    * BOT_CREDENTIALS (Enter here the authentication tokens for your bot accounts)
-    * MAX_PICTURE_HEIGHT (Maximum height of a picture in the web browser)
-
-Where can I get the tokens and bot accounts?
---------------------------------------------
-* Telegram: https://core.telegram.org/bots
-
-How to use PPP2?
-----------------
-* Start the presentation server:
-```
-bash Party-Picture-Presenter-2/ppp2/ppp2.sh
-```
-
-* Open a browser and open the overview page:
-```
 firefox http://127.0.0.1:8000
 ```
 
-* Click on Live Mode and start the Live presentation in fullscreen or normal mode
+For the persistence of the received images and information the folder "~/yapp_data" will be created and stores all received pictures and the sqlite database.
 
-* Open the Telegram messanger on your phone
 
-* Start a conversation with the bot (you can find your bot via the search function)
+Non Docker Usage, Dev and Testing
+---------------------------------
 
-* Send a photo to the bot
+Creation and usage of a virtual environment is advised: https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv
+```
+virtualenv venv -p $(which python3) && source venv/bin/activate
 
-* The bot will confirm the reception and show it in the browser window
+cd yapp
+
+python manage.py runbroker --settings yapp.settings.testing
+export TELEGRAM_CONTACT=http://t.me/MY-BOT-NAME && python manage.py runserver 0.0.0.0 --settings yapp.settings.testing
+export TELEGRAM_TOKEN=MY-TELEGRAM-BOT-TOKEN && python manage.py runbot
+
+```
 
 
 Further Documentation

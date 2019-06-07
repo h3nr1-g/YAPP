@@ -1,0 +1,45 @@
+{% extends 'presenter/blank.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block head %}
+    <script src="{% static "presenter/js/live.js" %}"></script>
+    <script src="{% static "presenter/js/ajax.js" %}"></script>
+    <script src="{% static "presenter/js/ws.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>
+    </div>
+
+    <div class="row">
+        <div style="width: 100%;" class="col-6">
+            <h3>Live Dia-Show</h3>
+            <img id="live_picture" style="max-width: 100%; max-height: 600px;" src="{% url "presenter:random_picture" %}">
+        </div>
+        <div class="col-6">
+            <h3>Fotobot URL</h3>
+        <img style="position: relative; left: -40px;" src="{% static "bots/img/telegram-contact.png" %}">
+        <br/>
+        <a href="{{ bot_contact }}">t.me/MKHochzeitsfotobot</a>
+   </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url "presenter:live" %}?fullscreen=1"><button type="button" style="width: 100%;" class="btn btn-lg btn-info">Vollbild-Modus</button></a>
+        </div>
+    </div>
+
+    <script>
+        init_ws("ws://{{ ws_broker_address }}:{{ ws_broker_port }}",ws_on_receive_callback);
+        init_ajax_update({{ seconds_per_picture }}, "{% url "presenter:random_picture" %}?json=1");
+    </script>
+
+{% endblock %}

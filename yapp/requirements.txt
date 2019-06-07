@@ -1,0 +1,10 @@
+
+Django==2.2.1
+django-bootstrap4==0.0.8
+django-tables2==2.0.6
+Pillow==6.0.0
+python-telegram-bot==11.1.0
+pytz==2019.1
+qrcode==6.1
+SimpleWebSocketServer==0.1.1
+websocket-client==0.56.0

@@ -1,0 +1,61 @@
+version: "3.7"
+
+
+services:
+  appserver:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    image: "yapp:latest"
+    env_file:
+      - ./ws.env
+    environment:
+      DJANGO_SECRET_KEY: "SECRET_1"
+      DJANGO_SETTINGS_MODULE: "yapp.settings.docker"
+#      TELEGRAM_CONTACT: "https://t.me/MKHochzeitsfotobot"
+      YAPP_LANG: "de"
+    volumes:
+      - static_volume:/root/yapp/static
+      - ~/yapp_data/media:/root/yapp/media:rw
+      - ~/yapp_data/db:/root/yapp/db:rw
+
+  nginx:
+    image: "nginx:latest"
+    volumes:
+      - ~/yapp_data/media/:/usr/share/nginx/html/media:ro
+      - static_volume:/usr/share/nginx/html/static:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - appserver
+
+  wsbroker:
+    command: ["python3", "/root/yapp/manage.py", "runbroker"]
+    image: "yapp:latest"
+    ports:
+      - "5555:5555"
+    env_file:
+      - ./ws.env
+    environment:
+      DJANGO_SETTINGS_MODULE: "yapp.settings.docker"
+      DJANGO_SECRET_KEY: "SECRET_2"
+
+  botrunner:
+    command: ["python3", "/root/yapp/manage.py", "runbot"]
+    image: "yapp:latest"
+    env_file:
+      - ./ws.env
+    environment:
+      DJANGO_SETTINGS_MODULE: "yapp.settings.docker"
+      DJANGO_SECRET_KEY: "SECRET_3"
+      TELEGRAM_TOKEN: "892795297:AAGP0pbreyzScEiwRGdldU_DksQwB1j87aI"
+      YAPP_LANG: "de"
+    volumes:
+      - ~/yapp_data/media:/root/yapp/media:rw
+      - ~/yapp_data/db:/root/yapp/db:rw
+    depends_on:
+      - appserver
+
+volumes:
+  static_volume: 

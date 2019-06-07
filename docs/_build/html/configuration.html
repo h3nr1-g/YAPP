@@ -17,45 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/style.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Party Picture Presenter 2  documentation" href="index.html"/>
-        <link rel="up" title="Installation" href="install.html"/>
-        <link rel="next" title="Usage" href="usage.html"/>
-        <link rel="prev" title="Required Software Packages" href="requirements.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Required Software Packages" href="requirements.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -108,7 +100,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Party Picture Presenter 2</a>
@@ -116,9 +108,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -166,22 +159,23 @@
 <h1>Set Up &amp; Configuration<a class="headerlink" href="#set-up-configuration" title="Permalink to this headline">¶</a></h1>
 <p>In order to get PPP2 up and running please execute the following commands:</p>
 <ol class="arabic simple">
-<li>Create the Bot account(s):<ul>
-<li>Telegram: <a class="reference external" href="https://core.telegram.org/bots">Link</a></li>
+<li><p>Create the Bot account(s):</p>
+<ul class="simple">
+<li><p>Telegram: <a class="reference external" href="https://core.telegram.org/bots">Link</a></p></li>
 </ul>
 </li>
-<li>Prepare the Django Web Application Framework</li>
+<li><p>Prepare the Django Web Application Framework</p></li>
 </ol>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> Party-Picture-Presenter-2/ppp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> Party-Picture-Presenter-2/ppp
 python3 manage.py makemigrations presenter
 python3 manage.py migrate
 python3 manage.py createsuperuser
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Edit the configuration file settings.py</li>
+<li><p>Edit the configuration file settings.py</p></li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Choose a new secret key</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose a new secret key</span>
 <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;SECRET_KEY&#39;</span>
 <span class="o">...</span>
 
@@ -207,18 +201,16 @@ python3 manage.py createsuperuser
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li>Start the HTTP server and all subcomponts</li>
+<li><p>Start the HTTP server and all subcomponts</p></li>
 </ol>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>bash ppp2.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash ppp2.sh
 </pre></div>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -227,7 +219,7 @@ python3 manage.py createsuperuser
         <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="requirements.html" class="btn btn-neutral" title="Required Software Packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="requirements.html" class="btn btn-neutral float-left" title="Required Software Packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -236,11 +228,11 @@ python3 manage.py createsuperuser
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright .
+        &copy; Copyright 
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -253,36 +245,15 @@ python3 manage.py createsuperuser
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
  <script type="text/javascript">
     $(document).ready(function() {

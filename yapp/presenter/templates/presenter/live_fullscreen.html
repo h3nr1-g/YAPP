@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="{% static "presenter/js/live_fullscreen.js" %}"></script>
+        <script src="{% static "presenter/js/ajax.js" %}"></script>
+        <script src="{% static "presenter/js/ws.js" %}"></script>
+        <title>YAPP- Live View - Fullscreen</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+        <!-- Custom styles for this template-->
+        <link href="{% static "presenter/css/sb-admin-2.min.css" %}" rel="stylesheet">
+    </head>
+    <body id="body" style="background-color: #464646;background-attachment: fixed;background-position: center center;background-image:url({% url "presenter:random_picture" %});background-repeat:no-repeat; background-size: contain;" >
+    <h1 id="title" style="width: 100%; text-align: center; position: absolute; bottom: 1px; color: #00e6fb; font-weight: bolder;"></h1>
+
+    <div style="position: absolute; bottom:10px; right: 10px; text-align: center;">
+        <img  width="100" src="{% static "bots/img/telegram-contact.png" %}">
+        <br/>
+        <a href="{{ bot_contact }}">{{ bot_contact }}</a>
+   </div>
+    <script>
+        init_ws("ws://{{ ws_broker_address }}:{{ ws_broker_port }}",ws_on_receive_callback);
+        init_ajax_update({{ seconds_per_picture }}, "{% url "presenter:random_picture" %}?json=1");
+    </script>
+
+    </body>
+</html>
