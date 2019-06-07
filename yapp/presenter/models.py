@@ -18,4 +18,4 @@ class Picture(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.title if self.title else 'No Title'
