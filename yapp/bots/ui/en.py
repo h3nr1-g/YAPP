@@ -6,7 +6,7 @@ STRING_DICTIONARY = {
     'EMPTY_DATABASE': 'Sorry, my database is empty. I need some pictures first.',
     'INTERNAL_ERROR': 'Ups, there wen\'t something wrong.',
     'INVALID_COMMAND': 'Sorry, I did not understand the last message',
-    'HELP_INTRODUCTION': 'Hello, I\'m the Yapp-Telegrambot. Send me a photo and I will show it immediately. At the moment I accept following text commands too:',
+    'HELP_INTRODUCTION': 'Hello, I\'m the Yapp-Telegrambot. Send me a photo and I will show it immediately. At the moment I accept a bunch of text based commands. You retrieve them via the text message "help".',
     'PICTURE_NOT_FOUND': 'Sorry, I could not find a picture with this ID.',
     'TITLE_UPDATE': 'Okay, I updated the title of this picture',
     'UPLOAD_FAILURE': 'Ups, upload failed',
@@ -16,17 +16,17 @@ STRING_DICTIONARY = {
 COMMANDS = [
     {
         'callback': lambda tokens: get_worst_pictures(int(tokens[2]), STRING_DICTIONARY['EMPTY_DATABASE']),
-        'description': 'This command retrieves a list of the most disliked photos. Exampe: "get worst 3"',
+        'description': 'Following command retrieves a list of the most disliked photos. Exampe: "get worst 3"',
         'regex': r'get worst \d+'
     },
     {
         'callback': lambda tokens: get_favourite_pictures(int(tokens[2]), STRING_DICTIONARY['EMPTY_DATABASE']),
-        'description': 'This command retrieves a list of the most favorite photos. Exampe: "get top 10"',
+        'description': 'Following command retrieves a list of the most favorite photos. Exampe: "get top 10"',
         'regex': r'get top \d+'
     },
     {
         'callback': lambda tokens: get_picture(int(tokens[2]), STRING_DICTIONARY['PICTURE_NOT_FOUND']),
-        'description': 'This command retrieves a specific picture (defined by it\'s ID). Exampe: "get picture 10"',
+        'description': 'Following command retrieves a specific picture (defined by it\'s ID). Exampe: "get picture 10"',
         'regex': r'get picture \d+'
     },
     {
@@ -36,22 +36,27 @@ COMMANDS = [
             STRING_DICTIONARY['TITLE_UPDATE'],
             STRING_DICTIONARY['PICTURE_NOT_FOUND']
         ),
-        'description': 'This command changes the title of a specific picture (defined by it\'s ID). Exampe: "set title of picture"',
+        'description': 'Following command changes the title of a specific picture (defined by it\'s ID). Exampe: "set title of picture"',
         'regex': r'set title of picture \d+: [a-z]+'
     },
     {
         'callback': lambda tokens: add_like(int(tokens[-1]), STRING_DICTIONARY['ADDED_LIKE']),
-        'description': 'This command adds a like to a specific picture (defined by it\'s ID). Exampe: "👍 picture 2"',
+        'description': 'Following command adds a like to a specific picture (defined by it\'s ID). Exampe: "👍 picture 2"',
         'regex': r'👍 (picture )?\d+'
     },
     {
         'callback': lambda tokens: add_dislike(int(tokens[-1]), STRING_DICTIONARY['ADDED_DISLIKE']),
-        'description': 'This command adds a dislike to a specific picture (defined by it\'s ID). Exampe: "👎 picture 2"',
+        'description': 'Following command adds a dislike to a specific picture (defined by it\'s ID). Exampe: "👎 picture 2"',
         'regex': r'👎 (picture )?\d+'
     },
     {
-        'callback': lambda tokens: show_help(STRING_DICTIONARY['HELP_INTRODUCTION']),
-        'description': 'This command sends you these help messages. Beispiel: "help"',
+        'callback': lambda tokens: show_help(),
+        'description': 'Following command sends you these help messages. Beispiel: "help"',
         'regex': r'help',
+    },
+    {
+        'callback': lambda tokens: (True, STRING_DICTIONARY['HELP_INTRODUCTION']),
+        'description': 'Following command shows an initial greeting message. Example: "/start"',
+        'regex': r'/?start',
     },
 ]

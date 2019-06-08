@@ -105,12 +105,12 @@ def set_title(pid, title, success_msg=None, fail_msg=None):
         return False, fail_msg
 
 
-def show_help(introduction_message):
+def show_help():
     """
     Method sends some of text messages and lists all available commands including a short explanation
     """
     from bots.ui import COMMANDS
-    messages = [introduction_message]
+    messages = []
     for element in COMMANDS:
       try:
          messages.append(element['description'])

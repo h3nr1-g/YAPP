@@ -4,7 +4,7 @@ STRING_DICTIONARY = {
     'ADDED_DISLIKE': 'Okay, ich habe dem Bild ein Dislike hinzugefügt.',
     'ADDED_LIKE': 'Okay, Ich habe dem Bild ein Like hinzugefügt.',
     'EMPTY_DATABASE': 'Ups, meine Datenbank ist noch leer. Ich benötigte erst ein paar Fotos',
-    'HELP_INTRODUCTION': 'Hallo, ich bin der Yapp-Telegrambot. Sende mir ein Foto und ich zeige es auf der Leinwand an. Außerdem unterstuetze momentan folgende Befehle:',
+    'HELP_INTRODUCTION': 'Hallo, ich bin der Yapp-Telegrambot. Sende mir ein Foto und ich zeige es auf der Leinwand an. Außerdem unterstuetze diverse textbasierte Befehle, die du mit der Nachricht "/hilfe" abrufen kannst.',
     'INTERNAL_ERROR': 'Ups, da ist etwas schief gegangen.',
     'INVALID_COMMAND': 'Entschuldigung, ich habe Ihre letzte Nachricht nicht verstanden',
     'PICTURE_NOT_FOUND': 'Entschuldigung, ich konnte kein Bild mit dieser ID finden.',
@@ -50,8 +50,13 @@ COMMANDS = [
         'regex': r'👎 (bild )?\d+',
     },
     {
-        'callback': lambda tokens: show_help(STRING_DICTIONARY['HELP_INTRODUCTION']),
+        'callback': lambda tokens: show_help(),
         'description': 'Folgender Befehl sendet dir diese Nachrichten. Beispiel: "hilfe"',
-        'regex': r'hilfe',
+        'regex': r'/?hilfe',
+    },
+    {
+        'callback': lambda tokens: (True, STRING_DICTIONARY['HELP_INTRODUCTION']),
+        'description': 'Folgender Befehl sendet dir eine initiale Begrüßung. Beispiel: "/start"',
+        'regex': r'/?start',
     },
 ]
