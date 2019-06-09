@@ -1,5 +1,6 @@
 {% extends 'presenter/blank.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 {{ title }}
@@ -19,14 +20,14 @@
 
     <div class="row">
         <div style="width: 100%;" class="col-6">
-            <h3>Live Dia-Show</h3>
+            <h3>Live Show</h3>
             <img id="live_picture" style="max-width: 100%; max-height: 600px;" src="{% url "presenter:random_picture" %}">
         </div>
         <div class="col-6">
-            <h3>Fotobot URL</h3>
-        <img style="position: relative; left: -40px;" src="{% static "bots/img/telegram-contact.png" %}">
+            <h3>Telegram {% trans "Contact" %}</h3>
+        <img style="position: relative;" src="{% static "bots/img/telegram-contact.png" %}">
         <br/>
-        <a href="{{ bot_contact }}">t.me/MKHochzeitsfotobot</a>
+        <a href="{{ bot_contact }}">{{ bot_contact }}</a>
    </div>
     </div>
     <br/>

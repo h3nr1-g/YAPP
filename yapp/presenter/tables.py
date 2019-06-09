@@ -1,19 +1,16 @@
+from django.utils.translation import gettext
 from django_tables2 import tables, TemplateColumn, Column
 
 from presenter.models import Picture
 
-DELETE_BUTTON_TEMPLATE = '<button onclick=\'ajax_delete_and_reload("{}")\' class="btn btn-danger">Löschen</button>'
-DETAILS_BUTTON_TEMPLATE = '<a href="{}"><button class="btn btn-info">Anzeigen</button></a>'
-
-
 class PictureTable(tables.Table):
-    timestamp = Column(verbose_name='Uploaddatum')
+    timestamp = Column(verbose_name=gettext('Timestamp'))
 
     filePath = TemplateColumn(
         '<a href="{% url "presenter:plain_picture" record.id %}">'
         '<img width="100" src="{% url "presenter:plain_picture" record.id %}">'
         '</a>',
-        verbose_name='Vorschau'
+        verbose_name=gettext('Preview')
     )
 
     class Meta:

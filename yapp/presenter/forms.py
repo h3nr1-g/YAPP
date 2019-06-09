@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext
 
 from presenter.models import Picture
 
@@ -9,11 +10,11 @@ class PictureUploadForm(forms.ModelForm):
     """
 
     filePath = forms.ImageField(
-        label='Datei',
+        label=gettext('File'),
     )
     title = forms.CharField(
         required=False,
-        label='Titel'
+        label=gettext('Title')
     )
     likes = forms.HiddenInput()
     dislikes = forms.HiddenInput()

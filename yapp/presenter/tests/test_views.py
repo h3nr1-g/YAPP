@@ -2,6 +2,7 @@ import os
 
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.translation import gettext
 from django_webtest import WebTest
 from webtest import Upload
 
@@ -56,7 +57,7 @@ class UploadPictureViewTest(WebTest):
         upload_form = response.forms[0]
         response = upload_form.submit(expect_errors=True)
         self.assertEqual(400, response.status_code)
-        self.assertIn('Formular enthaelt fehlerhafte Eingaben. Bitte Eingaben pruefen.', str(response))
+        self.assertIn(gettext('Form contains invalid input.'), str(response))
 
     def test_post_valid_upload(self):
         self.assertEqual(0, len(Picture.objects.all()))
@@ -67,7 +68,7 @@ class UploadPictureViewTest(WebTest):
         upload_form['title'] = 'Foobar'
         response = upload_form.submit()
         self.assertEqual(200, response.status_code)
-        self.assertIn('Bild erfolgreich gespeichert.', str(response))
+        self.assertIn(gettext('Picture saved'), str(response))
         self.assertEqual(1, len(Picture.objects.all()))
         self.assertTrue(os.path.exists(Picture.objects.all()[0].filePath.path))
 

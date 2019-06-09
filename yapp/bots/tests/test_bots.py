@@ -38,6 +38,6 @@ class BaseBotTest(TestCase):
 
     def test_process_message_change_title(self):
         old_title = self.picture.title
-        success, _ = self.bot.process_message('set title {} foobar1234'.format(self.picture.id))
+        success, _ = self.bot.process_message('set title of picture {}: foobar1234'.format(self.picture.id))
         self.assertTrue(success)
         self.assertNotEqual(Picture.objects.get(id=self.picture.id).title, old_title)

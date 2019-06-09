@@ -1,6 +1,7 @@
 {% extends 'presenter/blank.html' %}
 {% load bootstrap4 %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 {{ title }}
@@ -34,7 +35,7 @@
                 {% csrf_token %}
                 {% bootstrap_form form%}
                 {% buttons %}
-                    <button type="submit" style="width: 100%;" class="btn btn-lg btn-info">Bild speichern</button>
+                    <button type="submit" style="width: 100%;" class="btn btn-lg btn-info">{% trans "Save" %}</button>
                 {% endbuttons %}
             </form>
 

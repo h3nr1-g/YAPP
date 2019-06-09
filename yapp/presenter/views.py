@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.urls import reverse_lazy
 from django.views import View
+from django.utils.translation import gettext
 
 from yapp.settings.base import WS_BROKER_PORT, WS_BROKER_ADDRESS, BOT_SETTINGS
 from presenter.forms import PictureUploadForm
@@ -17,7 +18,7 @@ class LiveModeView(View):
     """
     View class for the start page
     """
-    title = 'Party Picture Presenter 2.0'
+    title = 'Live View'
 
     def get(self, request):
         fullscreen = request.GET.get('fullscreen', None)
@@ -36,7 +37,7 @@ class AllPicturesView(View):
     """
     View class for list of all pictures
     """
-    title = 'Bilder - Alle'
+    title = gettext('All Pictures')
 
     def get(self, request):
         context = {
@@ -66,7 +67,6 @@ class RandomPictureView(View):
     """
 
     def get(self, request):
-
         all_pictures = list(Picture.objects.all())
         while len(all_pictures) > 0:
             picture_obj = all_pictures[random.randint(0, len(all_pictures) - 1)]
@@ -90,7 +90,7 @@ class UploadPictureView(View):
     """
     View class for manual uploading of a picture
     """
-    title = 'Bild hochladen'
+    title = gettext('Manual Upload')
 
     def get(self, request):
         context = {
@@ -104,9 +104,9 @@ class UploadPictureView(View):
         if form.is_valid():
             form.save()
             response_class = HttpResponse
-            notification = (True, 'Bild erfolgreich gespeichert.')
+            notification = (True, gettext('Picture saved'))
         else:
-            notification = (False, 'Formular enthaelt fehlerhafte Eingaben. Bitte Eingaben pruefen.')
+            notification = (False, gettext('Form contains invalid input.'))
             response_class = HttpResponseBadRequest
 
         context = {

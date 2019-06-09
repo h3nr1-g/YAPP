@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
@@ -28,7 +28,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{% url "presenter:all_pictures" %}">
                 <i class="fas fa-fw fa-copy"></i>
-                <span>Alle Fotos</span>
+                <span>{% trans "All Pictures" %}</span>
             </a>
         </li>
 
@@ -38,7 +38,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{% url "presenter:upload_picture" %}">
                 <i class="fas fa-image"></i>
-                <span>Bild hochladen</span>
+                <span>{% trans "Manual Upload" %}</span>
             </a>
         </li>
 

@@ -1,4 +1,5 @@
-from bots.api import get_worst_pictures, get_favourite_pictures, get_picture, set_title, add_like, add_dislike, show_help
+from bots.api import get_worst_pictures, get_favourite_pictures, get_picture, set_title, add_like, add_dislike, \
+    show_help
 
 STRING_DICTIONARY = {
     'ADDED_DISLIKE': 'Okay, I added a dislike to this picture.',
@@ -31,7 +32,7 @@ COMMANDS = [
     },
     {
         'callback': lambda tokens: set_title(
-            int(tokens[4]),
+            int(tokens[4].replace(':', '')),
             (' '.join(tokens[3:])).strip(),
             STRING_DICTIONARY['TITLE_UPDATE'],
             STRING_DICTIONARY['PICTURE_NOT_FOUND']
