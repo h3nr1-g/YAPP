@@ -7,7 +7,7 @@ from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext import Updater
 from bots.ui import COMMANDS, STRING_DICTIONARY
-from presenter.models import Picture
+from presenter.models import Picture, Video
 
 logging.basicConfig(level=logging.INFO)
 _TELEGRAM_LOGGER = logging.getLogger('TelegramBot')
@@ -102,10 +102,27 @@ class TelegramBot(BaseBot, Thread):
         """
         try:
             self.logger.info('Received new text message')
-            self.logger.debug('Message text: {}'.format(update.message.text))
-            _, response = super().process_message(update.message.text)
-            self.logger.info('Message processed successfully')
-            self.send_response(bot, update, response)
+            if update.message.text:
+                self.logger.debug('Message text: {}'.format(update.message.text))
+                _, response = super().process_message(update.message.text)
+                self.logger.info('Message processed successfully')
+                self.send_response(bot, update, response)
+            if update.message.video:
+                file_handler = bot.get_file(update.message.video.file_id)
+                filename = 'telegram_{}.{}'.format(int(time()), update.message.video.mime_type.split('/')[-1])
+                filename = os.path.join(self.download_directory, filename)
+                try:
+                    file_handler.download(filename)
+                    picture_obj = Video.objects.create(
+                        filePath=filename,
+                        mimeType=update.message.video.mime_type,
+                    )
+                    self.logger.info('Video stored')
+                    self.logger.debug('Video ID {}'.format(picture_obj.id))
+                    self.send_response(bot, update, STRING_DICTIONARY['UPLOAD_SUCCESS'].format(picture_obj.id))
+                except Exception as e:
+                    self.logger.error('Processing of video failed: {}'.format(str(e)))
+                    update.message.reply_text(STRING_DICTIONARY['UPLOAD_FAILURE'])
         except Exception as e:
             self.logger.error('Processing of message failed: {}'.format(str(e)))
 

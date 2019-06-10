@@ -14,8 +14,8 @@
         <link href="{% static "presenter/css/sb-admin-2.min.css" %}" rel="stylesheet">
     </head>
     <body id="body" style="background-color: #464646;background-attachment: fixed;background-position: center center;background-image:url({% url "presenter:random_picture" %});background-repeat:no-repeat; background-size: contain;" >
+    <video muted id="video" style="min-height: 10px; max-width: 10px;"><source src="{% url "presenter:plain_video" 1 %}"></video>
     <h1 id="title" style="width: 100%; text-align: center; position: absolute; bottom: 1px; color: #00e6fb; font-weight: bolder;"></h1>
-
     <div style="position: absolute; bottom:10px; right: 10px; text-align: center;">
         <img  width="100" src="{% static "bots/img/telegram-contact.png" %}">
         <br/>

@@ -12,13 +12,29 @@ def delete_obsolete_file(sender, instance, **kwargs):
         os.remove(instance.filePath.path)
 
 
-def publish_picture(sender, instance, **kwargs):
+def publish_picture(instance, **kwargs):
     from yapp.settings.base import WS_BROKER_ADDRESS, WS_BROKER_PORT
     try:
         data = {
             'url': str(reverse_lazy('presenter:plain_picture', args=[instance.id])),
             'number': instance.id,
             'title': instance.title,
+            'type': 'picture'
+        }
+        ws = create_connection("ws://{}:{}".format(WS_BROKER_ADDRESS, WS_BROKER_PORT))
+        ws.send(json.dumps(data))
+        ws.close()
+    except ConnectionRefusedError:
+        print('Could not establish WS connection for announcement of new picture')
+
+def publish_video(instance, **kwargs):
+    from yapp.settings.base import WS_BROKER_ADDRESS, WS_BROKER_PORT
+    try:
+        data = {
+            'url': str(reverse_lazy('presenter:plain_picture', args=[instance.id])),
+            'number': instance.id,
+            'title': instance.title,
+            'mimetype': instance.mimeType,
         }
         ws = create_connection("ws://{}:{}".format(WS_BROKER_ADDRESS, WS_BROKER_PORT))
         ws.send(json.dumps(data))

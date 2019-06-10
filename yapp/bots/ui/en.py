@@ -11,7 +11,7 @@ STRING_DICTIONARY = {
     'PICTURE_NOT_FOUND': 'Sorry, I could not find a picture with this ID.',
     'TITLE_UPDATE': 'Okay, I updated the title of this picture',
     'UPLOAD_FAILURE': 'Ups, upload failed',
-    'UPLOAD_SUCCESS': 'Okay, thanks for the picture. I will store it with unique ID {}.',
+    'UPLOAD_SUCCESS': 'Okay, thanks for the picture/video. I will store it with unique ID {}.',
 }
 
 COMMANDS = [

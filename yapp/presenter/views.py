@@ -10,7 +10,7 @@ from django.utils.translation import gettext
 
 from yapp.settings.base import WS_BROKER_PORT, WS_BROKER_ADDRESS, BOT_SETTINGS
 from presenter.forms import PictureUploadForm
-from presenter.models import Picture
+from presenter.models import Picture, Video
 from presenter.tables import PictureTable
 
 
@@ -44,7 +44,7 @@ class AllPicturesView(View):
             'title': self.title,
             'table': PictureTable(Picture.objects.all().order_by(request.GET.get('sort', '-timestamp')))
         }
-        return render(request, 'presenter/all_pictures.html', context)
+        return render(request, 'presenter/all.html', context)
 
 
 class PlainPictureView(View):
@@ -57,7 +57,21 @@ class PlainPictureView(View):
         if not os.path.exists(picture_obj.filePath.path):
             return HttpResponseNotFound()
         with open(picture_obj.filePath.path, 'rb') as fh:
-            resp = HttpResponse(fh.read(), content_type='image/jpeg')
+            resp = HttpResponse(fh.read(), content_type=picture_obj.mimeType)
+        return resp
+
+
+class PlainVideoView(View):
+    """
+    View class for providing only the picture
+    """
+
+    def get(self, request, video_id):
+        video_obj = get_object_or_404(Video, pk=video_id)
+        if not os.path.exists(video_obj.filePath.path):
+            return HttpResponseNotFound()
+        with open(video_obj.filePath.path, 'rb') as fh:
+            resp = HttpResponse(fh.read(), content_type=video_obj.mimeType)
         return resp
 
 

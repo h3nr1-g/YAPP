@@ -19,6 +19,7 @@ class PictureUploadForm(forms.ModelForm):
     likes = forms.HiddenInput()
     dislikes = forms.HiddenInput()
     timestamp = forms.HiddenInput()
+    mimeType = forms.HiddenInput()
 
     class Meta:
         model = Picture

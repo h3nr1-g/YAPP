@@ -1,13 +1,19 @@
 from django.db import models
 
 
-class Picture(models.Model):
+class MediaObject(models.Model):
     """
-    Model class for the uploaded/ submitted party pictures
+    Base class for picture and video objects
     """
 
     filePath = models.ImageField()
     title = models.CharField(
+        max_length=200,
+        blank=True,
+        default=None,
+        null=True,
+    )
+    mimeType= models.CharField(
         max_length=200,
         blank=True,
         default=None,
@@ -19,3 +25,18 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.title if self.title else 'No Title'
+
+    class Meta:
+        abstract = True
+
+
+class Picture(MediaObject):
+    """
+    Model class for the uploaded/ submitted party pictures
+    """
+
+
+class Video(MediaObject):
+    """
+    Model class for the uploaded/ submitted party pictures
+    """

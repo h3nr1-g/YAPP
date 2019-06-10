@@ -10,7 +10,7 @@ STRING_DICTIONARY = {
     'PICTURE_NOT_FOUND': 'Entschuldigung, ich konnte kein Bild mit dieser ID finden.',
     'TITLE_UPDATE': 'Okay, ich habe den Titel des Bildes aktualisiert.',
     'UPLOAD_FAILURE': 'Ups, der Upload ist fehlgeschlagen',
-    'UPLOAD_SUCCESS': 'Danke für das Bild. Ich speichere es mit der ID {}.',
+    'UPLOAD_SUCCESS': 'Danke für das Bild bzw. Video. Ich speichere es mit der ID {}.',
 }
 
 COMMANDS = [

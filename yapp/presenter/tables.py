@@ -1,7 +1,8 @@
 from django.utils.translation import gettext
 from django_tables2 import tables, TemplateColumn, Column
 
-from presenter.models import Picture
+from presenter.models import MediaObject
+
 
 class PictureTable(tables.Table):
     timestamp = Column(verbose_name=gettext('Timestamp'))
@@ -14,10 +15,10 @@ class PictureTable(tables.Table):
     )
 
     class Meta:
-        model = Picture
+        model = MediaObject
         template_name = 'django_tables2/bootstrap4.html'
         sequence = ('filePath', 'title', 'likes', 'dislikes', 'timestamp')
-        exclude = ('id',)
+        exclude = ('id','mimeType')
         attrs = {
             'style': 'width:100%;'
         }

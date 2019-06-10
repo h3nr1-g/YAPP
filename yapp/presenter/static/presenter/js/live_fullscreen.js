@@ -46,6 +46,22 @@ function ajax_update_picture(xhttp){
 function init_ajax_update(interval_duration, url) {
     seconds_per_picture = interval_duration;
     random_picture_url = url;
+
+    var video = document.getElementById("video");
+    video.addEventListener('click',function(e){
+      if (this.requestFullscreen)
+        this.requestFullscreen();
+      else if (this.msRequestFullscreen)
+        this.msRequestFullscreen();
+      else if (this.mozRequestFullScreen) // Note the capital "S" in Screen
+        this.mozRequestFullScreen();
+      else if (this.webkitRequestFullscreen)
+        this.webkitRequestFullscreen();
+      video.play();
+      video.focus();
+    }, false);
+
+
     if(interval == null){
         interval = setInterval(
             function () {
