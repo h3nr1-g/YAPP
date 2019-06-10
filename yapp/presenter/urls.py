@@ -1,6 +1,7 @@
 from django.urls import path
 
-from presenter.views import LiveModeView, AllPicturesView, PlainPictureView, RandomPictureView, UploadPictureView, PlainVideoView
+from presenter.views import LiveModeView, AllPicturesView, PlainPictureView, RandomPictureView, UploadPictureView, \
+    PlainVideoView, RandomMediaObjectView
 
 urlpatterns = [
     path('live/', LiveModeView.as_view(), name='live'),
@@ -14,5 +15,5 @@ urlpatterns = [
     # path('videos/', AllVideoView.as_view(), name='all_videos'),
     # path('videos/upload/', UploadVideoView.as_view(), name='upload_video'),
     #
-    # path('random/', RandomMediaObjectView.as_view(), name='random_object'),
+    path('random/', RandomMediaObjectView.as_view(), name='random_media_object'),
 ]

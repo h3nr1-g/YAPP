@@ -6,7 +6,7 @@ class MediaObject(models.Model):
     Base class for picture and video objects
     """
 
-    filePath = models.ImageField()
+    filePath = models.FileField()
     title = models.CharField(
         max_length=200,
         blank=True,

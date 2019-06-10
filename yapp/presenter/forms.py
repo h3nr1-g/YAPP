@@ -9,7 +9,7 @@ class PictureUploadForm(forms.ModelForm):
     Model form for uploading pictures
     """
 
-    filePath = forms.ImageField(
+    filePath = forms.FileField(
         label=gettext('File'),
     )
     title = forms.CharField(

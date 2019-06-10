@@ -95,7 +95,33 @@ class RandomPictureView(View):
                 })
 
             with open(picture_obj.filePath.path, 'rb') as fh:
-                resp = HttpResponse(fh.read(), content_type='image/jpeg')
+                resp = HttpResponse(fh.read(), content_type=picture_obj.mimeType)
+            return resp
+        return HttpResponseNotFound()
+
+
+class RandomMediaObjectView(View):
+    """
+    View class for the provision of a random picture or video
+    """
+    def get(self, request):
+        all_media_objects = list(Picture.objects.all()) + list(Video.objects.all())
+        while len(all_media_objects) > 0:
+            media_obj = all_media_objects[random.randint(0, len(all_media_objects) - 1)]
+            if not os.path.exists(media_obj.filePath.path):
+                continue
+            if request.GET.get('json', None):
+                url_alias = 'presenter:' + ('plain_picture' if isinstance(media_obj,Picture) else 'plain_video' )
+                return JsonResponse({
+                    'url': str(reverse_lazy(url_alias, args=[media_obj.id])),
+                    'title': media_obj.title,
+                    'likes': media_obj.likes,
+                    'dislikes': media_obj.dislikes,
+                    'mimeType': media_obj.mimeType,
+                })
+
+            with open(media_obj.filePath.path, 'rb') as fh:
+                resp = HttpResponse(fh.read(), content_type=media_obj.mimeType)
             return resp
         return HttpResponseNotFound()
 
