@@ -1,5 +1,5 @@
 
-Django==2.2.1
+Django==2.2.24
 django-bootstrap4==0.0.8
 django-tables2==2.0.6
 Pillow==6.0.0
